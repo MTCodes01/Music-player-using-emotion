@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PT-Emotion-based Music Player</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>Emotion-based Music Player</h1>
+        </header>
+        <div id="player">
+            <div id="now-playing">
+                <img id="album-art" src="" alt="Album Art">
+                <div id="song-info">
+                    <h2 id="song-title">Song Title</h2>
+                    <p id="artist-name">Artist Name</p>
+                </div>
+            </div>
+            <div id="controls">
+                <button id="prev-btn">Prev</button>
+                <button id="play-btn">Play</button>
+                <button id="next-btn">Next</button>
+            </div>
+        </div>
+        <div id="emotion-display">
+            <h3>Current Emotion: <span id="emotion">Neutral</span></h3>
+        </div>
+    </div>
+    <script src="https://sdk.scdn.co/spotify-player.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
