@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PT-Emotion-based Music Player</title>
+    <link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>Emotion-based Music Player</h1>
+        </header>
+        <div id="player">
+            <div id="now-playing">
+                <img id="album-art" src="" alt="Album img">
+                <div id="song-info">
+                    <h2 id="song-title">Song Title</h2>
+                    <p id="artist-name">Artist Name</p>
+                </div>
+            </div>
+            <div id="controls">
+                <button id="prev-btn">Prev</button>
+                <button id="play-btn">Play</button>
+                <button id="next-btn">Next</button>
+            </div>
+        </div>
+        <div id="emotion-display">
+            <h3>Current Emotion: <span id="emotion">Neutral</span></h3>
+        </div>
+        <div id="camera-feed">
+            <h3>Camera Feed:</h3>
+            <video id="video" width="640" height="480" autoplay></video>
+        </div>
+    </div>
+    <script src="../static/script.js"></script>
+</body>
+</html>
