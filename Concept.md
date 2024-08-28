@@ -1,7 +1,7 @@
 The *Emotion-Detecting Music Player* is an engaging project that combines artificial intelligence and music to create a personalized listening experience based on the user's emotional state. Here’s how you can develop this project:
 
 ### *Project Overview:*
-The Emotion-Detecting Music Player uses facial emotion recognition to detect the user’s mood through a camera (webcam or smartphone). Based on the detected emotion, the system automatically plays music that aligns with or enhances that mood. For example, if the system detects that the user is happy, it might play upbeat and cheerful music. If the user appears sad, it could play calming or uplifting tunes.
+The Emotion-Detecting Music Player uses facial emotion recognition to detect the user’s mood through a camera (webcam or smartphone). Based on the detected emotion, the system automatically plays music that aligns with or enhances that mood.
 
 ### *Key Features:*
 
