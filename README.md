@@ -38,6 +38,7 @@ The **Emotion-Detecting Music Player** is an program that uses facial emotion re
     pip install -r requirements.txt
     ```
 5. Install the pre-trained model [Click here](https://drive.google.com/file/d/1w0jIzgiXcEh3U2UQI5gMLn9DRRacm9Ij/view?usp=sharing)
+6. Install the pre-defined music library [Click here](https://drive.google.com/drive/folders/1vqBbMODw54qFj-yE4OlC9n_98m6mT7_L?usp=sharing)
 
 ## Usage
 
