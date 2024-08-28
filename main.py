@@ -4,8 +4,8 @@ import cv2
 import tensorflow as tf
 import time
 from collections import Counter
-from Module.music import EmotionMusicPlayer, emotion_dict, music_library
-from Module.UI import EmotionMusicUI
+from Modules.music import EmotionMusicPlayer, emotion_dict, music_library
+from Modules.UI import EmotionMusicUI
 
 # Initialize the EmotionMusicPlayer
 player = EmotionMusicPlayer(emotion_dict, music_library)
@@ -48,37 +48,52 @@ def emotion_detection():
     ])
 
     model.compile(loss='categorical_crossentropy', optimizer=tf.keras.optimizers.Adam(), metrics=['accuracy'])
-    model.load_weights('model/emotion_model.h5')
+    model.load_weights('model.weights.h5')
+
+    global start_time
 
     while True:
         ret, frame = cap.read()
         if not ret:
             break
 
-        gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        faces = facecasc.detectMultiScale(gray_frame, scaleFactor=1.3, minNeighbors=5)
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        faces = facecasc.detectMultiScale(gray, scaleFactor=1.3, minNeighbors=5)
 
         for (x, y, w, h) in faces:
-            roi_gray = gray_frame[y:y + h, x:x + w]
-            roi_gray = cv2.resize(roi_gray, (48, 48))
-            roi_gray = roi_gray.astype("float") / 255.0
-            roi_gray = np.expand_dims(roi_gray, axis=-1)
-            roi_gray = np.expand_dims(roi_gray, axis=0)
+            cv2.rectangle(frame, (x, y-50), (x+w, y+h+10), (255, 0, 0), 2)
+            roi_gray = gray[y:y + h, x:x + w]
+            cropped_img = np.expand_dims(np.expand_dims(cv2.resize(roi_gray, (48, 48)), -1), 0)
+            prediction = model.predict(cropped_img)
+            maxindex = int(np.argmax(prediction))
+            cv2.putText(frame, emotion_dict[maxindex], (x+20, y-60), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
 
-            prediction = model.predict(roi_gray)[0]
-            emotion_index = int(np.argmax(prediction))
-            emotion_buffer.append(emotion_index)
+            # Store recognized emotion in the buffer
+            emotion_buffer.append(maxindex)
+        
+        try:
+            # Check if the buffer is full
+            if time.time() - start_time >= buffer_duration:
+                # Most common emotion in buffer
+                most_common_emotion = Counter(emotion_buffer).most_common(1)[0][0]
+                emotion_buffer.clear()
+                ui.update_emotion_display(most_common_emotion)
+                player.play_music(most_common_emotion)
 
-        # Check if the buffer is full
-        if time.time() - start_time > buffer_duration:
-            # Most common emotion in buffer
-            most_common_emotion = Counter(emotion_buffer).most_common(1)[0][0]
-            emotion_buffer.clear()
-            ui.update_emotion_display(most_common_emotion)
-            player.play_music(most_common_emotion)
-
-            # Reset the timer
-            start_time = time.time()
+                # Reset the timer
+                start_time = time.time()
+        except IndexError as i:
+            print(f"No one in view!")
+            time.sleep(5)
+            continue
+        except RuntimeError as r:
+            if str(r) == 'main thread is not in main loop':
+                print("Sayonara!")
+                break
+            else: raise
+        except Exception as e:
+            print(f"Error: {e}")
+            continue
 
         cv2.imshow('Video', frame)
         if cv2.waitKey(1) & 0xFF == ord('q'):
