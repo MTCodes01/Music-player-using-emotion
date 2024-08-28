@@ -1,5 +1,5 @@
 import tkinter as tk
-from music import EmotionMusicPlayer, emotion_dict, music_library
+from Modules.music import EmotionMusicPlayer, emotion_dict, music_library
 
 class EmotionMusicUI:
     def __init__(self, player):
