@@ -37,17 +37,22 @@ The **Emotion-Detecting Music Player** is an program that uses facial emotion re
     ```sh
     pip install -r requirements.txt
     ```
+5. Install the pre-trained model [Click here](https://drive.google.com/file/d/1w0jIzgiXcEh3U2UQI5gMLn9DRRacm9Ij/view?usp=sharing)
 
 ## Usage
 
 1. Ensure you have Python installed on your system. You can download it from [python.org](https://www.python.org/).
-2. Run the main script:
+2. `Run the train script`(Ignore if you installed the pre-trained model)
+   ```sh
+   python train.py
+   ```
+4. `Run the main script`(After either the training/Download of the pre-trained model is done and `model.weights.h5` is in the same directory as the `main.py`):
     ```sh
     python main.py
     ```
-3. The camera will start capturing your facial expressions, and the system will detect your emotion.
-4. Based on the detected emotion, the corresponding playlist will start playing automatically.
-5. Use the user interface to control playback, view the detected emotion, or manually select a different mood if needed.
+5. The camera will start capturing your facial expressions, and the system will detect your emotion.
+6. Based on the detected emotion, the corresponding playlist will start playing automatically.
+7. Use the user interface to control playback, view the detected emotion, or manually select a different mood if needed.
 
 > [!NOTE]
 > ## Emotion-Based Playlists
