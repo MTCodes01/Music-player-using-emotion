@@ -15,16 +15,15 @@ class EmotionMusicPlayer:
         pygame.mixer.init()
 
     def play_music(self, emotion_index):
-        print(f"play_music called with emotion_index: {emotion_index}")  # Debugging
+        print(f"play_music called with emotion_index: {emotion_index}")
         emotion = self.emotion_dict.get(emotion_index, "Neutral")
-        print(f"Resolved emotion: {emotion}")  # Debugging
-    
+        print(f"Resolved emotion: {emotion}")
+
         if emotion != self.current_emotion or not self.is_playing:
             self.current_emotion = emotion
             self.switch_track(emotion)
         elif self.is_paused:
             self.resume_music()
-
 
     def switch_track(self, emotion):
         if self.current_track:
@@ -35,7 +34,7 @@ class EmotionMusicPlayer:
         if tracks:
             track_path = random.choice(tracks)
             if track_path and os.path.exists(track_path):
-                try: 
+                try:
                     pygame.mixer.music.load(track_path)
                     pygame.mixer.music.play(loops=0)
                     self.current_track = track_path
@@ -74,13 +73,10 @@ class EmotionMusicPlayer:
         pygame.mixer.quit()
 
 def get_file_paths(folder_path):
-    # List of acceptable audio file extensions
     audio_extensions = ('.mp3', '.wav', '.ogg', '.flac')
-
     file_paths = []
     for root, dirs, files in os.walk(folder_path):
         for file in files:
-            # Check if the file has an audio extension
             if file.lower().endswith(audio_extensions):
                 file_paths.append(os.path.join(root, file))
     return file_paths
@@ -88,35 +84,24 @@ def get_file_paths(folder_path):
 # Emotion dictionary
 emotion_dict = {
     0: "Angry",
-    1: "Disgusted",
-    2: "Fearful",
+    1: "Disgust",
+    2: "Fear",
     3: "Happy",
-    4: "Neutral",
+    4: "Sad",
     5: "Surprised",
-    6: "Sad"
+    6: "Neutral"
 }
 
 # Offline music library paths
 music_folders = {
     0: 'D:\\Github\\Parasseri-Techies\\Music\\Angry',
-    1: 'D:\\Github\\Parasseri-Techies\\Music\\Disgusted',
-    2: 'D:\\Github\\Parasseri-Techies\\Music\\Fearful',
+    1: 'D:\\Github\\Parasseri-Techies\\Music\\Disgust',
+    2: 'D:\\Github\\Parasseri-Techies\\Music\\Fear',
     3: 'D:\\Github\\Parasseri-Techies\\Music\\Happy',
-    4: 'D:\\Github\\Parasseri-Techies\\Music\\Neutral',
+    4: 'D:\\Github\\Parasseri-Techies\\Music\\Sad',
     5: 'D:\\Github\\Parasseri-Techies\\Music\\Surprised',
-    6: 'D:\\Github\\Parasseri-Techies\\Music\\Sad'
+    6: 'D:\\Github\\Parasseri-Techies\\Music\\Neutral'
 }
 
 # Create the music library
 music_library = {emotion_dict[i]: get_file_paths(j) for i, j in music_folders.items()}
-
-# # Example usage
-# player = EmotionMusicPlayer(emotion_dict, music_library)
-
-# # Simulate emotion change
-# player.play_music(3)
-# player.play_music(4)
-# player.play_music(5)
-
-# # After testing
-# player.quit_player()  # Ensure pygame quits when done
