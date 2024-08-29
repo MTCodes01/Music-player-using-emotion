@@ -92,15 +92,17 @@ emotion_dict = {
     6: "Neutral"
 }
 
+path = os.getcwd()
+
 # Offline music library paths
 music_folders = {
-    0: 'D:\\Github\\Parasseri-Techies\\Music\\Angry',
-    1: 'D:\\Github\\Parasseri-Techies\\Music\\Disgust',
-    2: 'D:\\Github\\Parasseri-Techies\\Music\\Fear',
-    3: 'D:\\Github\\Parasseri-Techies\\Music\\Happy',
-    4: 'D:\\Github\\Parasseri-Techies\\Music\\Sad',
-    5: 'D:\\Github\\Parasseri-Techies\\Music\\Surprised',
-    6: 'D:\\Github\\Parasseri-Techies\\Music\\Neutral'
+    0: f'{path}\\Music\\Angry',
+    1: f'{path}\\Music\\Disgust',
+    2: f'{path}\\Music\\Fear',
+    3: f'{path}\\Music\\Happy',
+    4: f'{path}\\Music\\Sad',
+    5: f'{path}\\Music\\Surprised',
+    6: f'{path}\\Music\\Neutral'
 }
 
 # Create the music library

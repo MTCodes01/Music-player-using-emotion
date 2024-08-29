@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import ttk
 from Modules.music import EmotionMusicPlayer, emotion_dict, music_library
 
 class EmotionMusicUI:
@@ -6,7 +7,7 @@ class EmotionMusicUI:
         self.player = player
         self.root = tk.Tk()
         self.root.title("Emotion-Based Music Player")
-        self.root.geometry("400x500")
+        self.root.geometry("400x350")
         self.root.configure(bg="#121212")
 
         self.current_emotion = None
@@ -15,22 +16,17 @@ class EmotionMusicUI:
         header = tk.Label(self.root, text="Emotion-Based Music Player", font=("Arial", 20, "bold"), bg="#121212", fg="white")
         header.pack(pady=20)
 
-        # Now Playing section
-        now_playing_frame = tk.Frame(self.root, bg="#121212", relief="groove")
-        now_playing_frame.pack(pady=20, padx=20, fill="x")
-
-        song_info_frame = tk.Frame(now_playing_frame, bg="#121212")
-        song_info_frame.pack(pady=10)
-
-        self.song_title = tk.Label(song_info_frame, text="Song Title", font=("Arial", 14, "bold"), bg="#121212", fg="white")
-        self.song_title.pack(anchor="w")
-
-        self.artist_name = tk.Label(song_info_frame, text="Artist Name", font=("Arial", 10), bg="#121212", fg="gray")
-        self.artist_name.pack(anchor="w", pady=5)
-
         # Emotion Display
         self.emotion_display = tk.Label(self.root, text="Current Emotion: Neutral", font=("Arial", 14), bg="#121212", fg="white")
         self.emotion_display.pack(pady=20)
+
+        # Dropdown for manual emotion selection
+        self.emotion_var = tk.StringVar()
+        self.emotion_dropdown = ttk.Combobox(self.root, textvariable=self.emotion_var, state="readonly", font=("Arial", 12))
+        self.emotion_dropdown['values'] = list(emotion_dict.values())
+        self.emotion_dropdown.set("Select Emotion")
+        self.emotion_dropdown.pack(pady=10)
+        self.emotion_dropdown.bind("<<ComboboxSelected>>", self.on_emotion_select)
 
         # Control buttons
         controls_frame = tk.Frame(self.root, bg="#121212")
@@ -63,8 +59,21 @@ class EmotionMusicUI:
         self.play_button.config(text="Pause")
 
     def on_quit(self):
+        print("Ok then!")
         self.player.quit_player()
         self.root.destroy()
 
+    def on_emotion_select(self, event):
+        selected_emotion = self.emotion_var.get()
+        emotion_index = list(emotion_dict.values()).index(selected_emotion)
+        self.update_emotion_display(emotion_index)
+        self.player.play_music(emotion_index)
+        self.play_button.config(text="Pause")
+
     def run(self):
         self.root.mainloop()
+
+# Example usage
+# player = EmotionMusicPlayer(emotion_dict, music_library)
+# ui = EmotionMusicUI(player)
+# ui.run()
