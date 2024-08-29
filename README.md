@@ -14,14 +14,11 @@ The **Emotion-Detecting Music Player** is an program that uses facial emotion re
   - Automatically selects and plays a playlist from a predefined set of mood-based playlists corresponding to the detected emotion.
   
 - **User Interface:** 
-  - Simple and intuitive interface to start the emotion detection, view the detected emotion, and control music playback.
-
-- **Real-Time Music Streaming:** 
-  - Dynamically adjusts the playlist based on the user’s changing emotions during playback.
-
-- **User Input Override:**
+  - Simple and intuitive interface to pause/play the current playing song, rendomly choose a song from the same emotion playlist and view the detected emotion.
+<!--
+ - **User Input Override:**
   - Allows users to manually select a mood if they prefer a different playlist than what is suggested.
-
+-->
 ## Installation
 
 1. Navigate to the desired directory using the shell/command prompt.
@@ -37,8 +34,8 @@ The **Emotion-Detecting Music Player** is an program that uses facial emotion re
     ```sh
     pip install -r requirements.txt
     ```
-5. Install the pre-trained model [Click here](https://drive.google.com/file/d/1w0jIzgiXcEh3U2UQI5gMLn9DRRacm9Ij/view?usp=sharing)
-6. Install the pre-defined music library [Click here](https://drive.google.com/drive/folders/1vqBbMODw54qFj-yE4OlC9n_98m6mT7_L?usp=sharing)
+5. Install the pre-trained model [Click here](https://drive.google.com/file/d/1ovr_qhyfKxpqIdyd5WFfvHA807Jln9Nr/view?usp=sharing) `Only Needed if you don't want to train a new model`
+6. Install the pre-defined music library [Click here](https://drive.google.com/drive/folders/1vqBbMODw54qFj-yE4OlC9n_98m6mT7_L?usp=sharing) `place the folder in the same directory as the main.py`
 
 ## Usage
 
@@ -52,9 +49,9 @@ The **Emotion-Detecting Music Player** is an program that uses facial emotion re
     python main.py
     ```
 5. The camera will start capturing your facial expressions, and the system will detect your emotion.
-6. Based on the detected emotion, the corresponding playlist will start playing automatically.
-7. Use the user interface to control playback, view the detected emotion, or manually select a different mood if needed.
-
+6. Based on the detected emotion, the corresponding song will start playing automatically.
+7. Use the user interface to pause/play the current playing song, rendomly choose a song from the same emotion playlist and view the detected emotion.
+   
 > [!NOTE]
 > ## Emotion-Based Playlists
 >
@@ -87,6 +84,7 @@ The **Emotion-Detecting Music Player** is an program that uses facial emotion re
 
 - `Concept.md` - Detailed description of the project and its concept.
 - `main.py` - The entry point of the application, integrates emotion detection and music playback.
+- `model.weights.h5` - Contains the model weights.
 - `LICENSE` - The license file for the project.
 - `README.md` - The file you're currently reading.
 
