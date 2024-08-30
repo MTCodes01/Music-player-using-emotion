@@ -27,8 +27,8 @@ class EmotionMusicPlayer:
 
     def switch_track(self, emotion):
         if self.current_track:
-            pygame.mixer.music.fadeout(3000)
-            time.sleep(3)
+            pygame.mixer.music.fadeout(1000)
+            time.sleep(1)
 
         tracks = self.music_library.get(emotion, [])
         if tracks:
