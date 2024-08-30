@@ -50,7 +50,7 @@ def emotion_detection():
     model.compile(loss='categorical_crossentropy', optimizer=tf.keras.optimizers.Adam(), metrics=['accuracy'])
     model.load_weights('model.weights.h5')
 
-    global start_time
+    global start_time, buffer_duration
 
     while True:
         ret, frame = cap.read()
@@ -83,7 +83,9 @@ def emotion_detection():
                 # Reset the timer
                 start_time = time.time()
         except IndexError as i:
+            buffer_duration = 2
             print(f"No one in view!")
+            ui.update_not_found()
             time.sleep(5)
             continue
         except RuntimeError as r:

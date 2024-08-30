@@ -61,6 +61,10 @@ class EmotionMusicUI:
         self.emotion_display.config(text=f"Current Emotion: {emotion_dict[emotion_index]}")
         self.emotion_var.set(emotion_dict[emotion_index])  # Update the dropdown to show the selected emotion
 
+    def update_not_found(self):
+        self.emotion_display.config(text="Emotion not recogonised!")
+        self.emotion_var.set(None)
+
     def on_play_pause(self):
         if self.player.is_playing and not self.player.is_paused:
             self.player.pause_music()
