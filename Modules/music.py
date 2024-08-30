@@ -9,6 +9,7 @@ class EmotionMusicPlayer:
         self.music_library = music_library
         self.current_emotion = None
         self.current_track = None
+        self.last_track = None
         self.is_playing = False
         self.is_paused = False
 
@@ -32,11 +33,24 @@ class EmotionMusicPlayer:
 
         tracks = self.music_library.get(emotion, [])
         if tracks:
-            track_path = random.choice(tracks)
+            # Ensure the new track is not the same as the last played track
+            available_tracks = [track for track in tracks if track != self.last_track]
+
+            if available_tracks:
+                track_path = random.choice(available_tracks)
+            else:
+                # If all tracks have been played, reset the pool (but don't repeat the last one)
+                available_tracks = tracks
+                track_path = random.choice(available_tracks)
+                if track_path == self.last_track and len(available_tracks) > 1:
+                    available_tracks.remove(self.last_track)
+                    track_path = random.choice(available_tracks)
+
             if track_path and os.path.exists(track_path):
                 try:
                     pygame.mixer.music.load(track_path)
                     pygame.mixer.music.play(loops=0)
+                    self.last_track = track_path  # Update last played track
                     self.current_track = track_path
                     self.is_playing = True
                     print(f"Playing {emotion} song: {track_path}")
@@ -88,7 +102,7 @@ emotion_dict = {
     2: "Fear",
     3: "Happy",
     4: "Sad",
-    5: "Surprised",
+    5: "Surprise",
     6: "Neutral"
 }
 
@@ -101,9 +115,20 @@ music_folders = {
     2: f'{path}\\Music\\Fear',
     3: f'{path}\\Music\\Happy',
     4: f'{path}\\Music\\Sad',
-    5: f'{path}\\Music\\Surprised',
+    5: f'{path}\\Music\\Surprise',
     6: f'{path}\\Music\\Neutral'
 }
 
 # Create the music library
 music_library = {emotion_dict[i]: get_file_paths(j) for i, j in music_folders.items()}
+
+# # Example usage:
+# player = EmotionMusicPlayer(emotion_dict, music_library)
+
+# # Simulate playing music with different emotions
+# player.play_music(3)  # Plays a "Happy" song
+# time.sleep(5)         # Wait for 5 seconds before switching tracks
+# player.next_track()   # Switch to another "Happy" song
+# time.sleep(5)         # Wait for 5 seconds before stopping
+# player.stop_music()   # Stop the music
+# player.quit_player()  # Quit the player
