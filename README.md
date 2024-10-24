@@ -1,8 +1,8 @@
-# Music-player-using-emotion
+# Vibify
 
 ## Project Description
 
-The **Emotion-Detecting Music Player** is an program that uses facial emotion recognition to create a personalized music experience. By detecting the user's emotional state through a camera, the player automatically selects and plays music that matches or enhances the detected mood.
+The **Vibify** is an program that uses facial emotion recognition to create a personalized music experience. By detecting the user's emotional state through a camera, the player automatically selects and plays music that matches or enhances the detected mood.
 
 ## Features
 
@@ -88,4 +88,4 @@ The **Emotion-Detecting Music Player** is an program that uses facial emotion re
 - `LICENSE` - The license file for the project.
 - `README.md` - The file you're currently reading.
 
-<div align="center"> Made for a project expo </div>
+<div align="center"> Made for a project expo in 4 days!</div>
